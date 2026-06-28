@@ -1,0 +1,9 @@
+# Force 
+GitHub
+ to detect your script files as Ren'Py code
+*.rpy linguist-language=Ren'Py
+*.rpy linguist-detectable=true
+
+# Ignore massive library files so they don't break your tracking graph
+/renpy/* linguist-vendored
+/lib/* linguist-vendored
