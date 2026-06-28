@@ -7,3 +7,19 @@ GitHub
 # Ignore massive library files so they don't break your tracking graph
 /renpy/* linguist-vendored
 /lib/* linguist-vendored
+# 1. Detect and track your Ren'Py script files
+*.rpy linguist-language=Ren'Py
+*.rpy linguist-detectable=true
+
+# 2. Force 
+GitHub to track any custom Python logic scripts you write
+*.py linguist-language=Python
+*.py linguist-detectable=true
+
+# 3. UN-HIDE the template's internal Python data files so they calculate into your bar
+/game/*.rpy linguist-vendored=false
+/game/*.py linguist-vendored=false
+
+# 4. Keep massive app launcher binaries hidden so they don't corrupt your metrics
+/renpy/* linguist-vendored
+/lib/* linguist-vendored
