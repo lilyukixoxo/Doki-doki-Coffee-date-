@@ -1,0 +1,244 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Doki Doki Coffee Date! - Official Mod Page</title>
+    <style>
+        /* Base page layout mimicking ddlc.moe */
+        body {
+            background-color: #ffdae9;
+            background-image: radial-gradient(#ffb7d5 20%, transparent 20%),
+                              radial-gradient(#ffb7d5 20%, transparent 20%);
+            background-size: 40px 40px;
+            background-position: 0 0, 20px 20px;
+            font-family: 'Arial Rounded MT Bold', 'Helvetica Neue', sans-serif;
+            margin: 0;
+            padding: 40px 20px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+        }
+
+        /* The central visual novel content card frame */
+        .main-card {
+            background: rgba(255, 255, 255, 0.95);
+            border: 5px solid #ff9ebb;
+            border-radius: 25px;
+            padding: 40px;
+            max-width: 700px;
+            width: 100%;
+            text-align: center;
+            box-shadow: 0px 15px 35px rgba(255, 105, 180, 0.2);
+            position: relative;
+            transition: background 0.2s, border-color 0.2s;
+        }
+
+        /* Title banner layout */
+        h1 {
+            color: #ff5e97;
+            font-size: 2.8em;
+            margin-top: 0;
+            margin-bottom: 15px;
+            text-shadow: 2px 2px 0px #fff, 4px 4px 0px #ffb7d5;
+        }
+
+        p {
+            color: #4a4a4a;
+            font-size: 1.15em;
+            line-height: 1.6;
+            margin-bottom: 30px;
+        }
+
+        /* Character Select Section */
+        .character-zone {
+            display: flex;
+            justify-content: space-around;
+            margin: 30px 0;
+            flex-wrap: wrap;
+            gap: 10px;
+        }
+
+        .char-btn {
+            background: #fff;
+            border: 3px solid #ffb7d5;
+            border-radius: 15px;
+            padding: 10px 20px;
+            font-weight: bold;
+            color: #ff5e97;
+            cursor: pointer;
+            transition: all 0.2s ease;
+        }
+
+        .char-btn:hover {
+            background: #ff5e97;
+            color: #fff;
+            transform: scale(1.05);
+        }
+
+        /* Multi-Platform Download Button Grid */
+        .download-zone {
+            margin-top: 40px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 15px;
+        }
+
+        .download-title {
+            color: #ff5e97;
+            font-size: 1.3em;
+            font-weight: bold;
+            margin-bottom: 5px;
+        }
+
+        .btn-group {
+            display: flex;
+            justify-content: center;
+            gap: 15px;
+            flex-wrap: wrap;
+            width: 100%;
+        }
+
+        .download-btn {
+            flex: 1;
+            min-width: 160px;
+            max-width: 200px;
+            background-color: #ff5e97;
+            color: white;
+            text-decoration: none;
+            padding: 15px 20px;
+            font-size: 1.05em;
+            font-weight: bold;
+            border-radius: 50px;
+            border: 3px solid #fff;
+            box-shadow: 0 5px 15px rgba(255, 94, 151, 0.4);
+            transition: all 0.2s ease-in-out;
+            text-align: center;
+        }
+
+        .download-btn:hover {
+            background-color: #e0467d;
+            transform: translateY(-3px);
+            box-shadow: 0 8px 20px rgba(255, 94, 151, 0.6);
+        }
+
+        /* --- ACT 2 HORROR GLITCH ANIMATION MECHANICS --- */
+        @keyframes window-smash {
+            0% { transform: translate(0, 0) rotate(0deg); }
+            10% { transform: translate(-5px, 3px) rotate(-1deg); }
+            20% { transform: translate(4px, -3px) rotate(1deg); }
+            30% { transform: translate(-3px, -2px) rotate(0deg); }
+            40% { transform: translate(3px, 4px) rotate(1deg); }
+            50% { transform: translate(-4px, 2px) rotate(-1deg); }
+            60% { transform: translate(4px, -4px) rotate(0deg); }
+            70% { transform: translate(-2px, 3px) rotate(1deg); }
+            80% { transform: translate(3px, -2px) rotate(-1deg); }
+            90% { transform: translate(-4px, -3px) rotate(1deg); }
+            100% { transform: translate(0, 0) rotate(0deg); }
+        }
+
+        .corrupted-state {
+            animation: window-smash 0.1s infinite;
+            background: #111 !important;
+            border-color: #aa0000 !important;
+            color: #aa0000 !important;
+        }
+        
+        .corrupted-text {
+            color: #aa0000 !important;
+            text-shadow: none !important;
+        }
+
+        /* Corrupts the download buttons during the glitch event */
+        .corrupted-btn {
+            background-color: #550000 !important;
+            border-color: #aa0000 !important;
+            box-shadow: 0 5px 15px rgba(170, 0, 0, 0.4) !important;
+        }
+        .corrupted-btn:hover {
+            background-color: #aa0000 !important;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="main-card" id="gameCard">
+        <h1 id="mainTitle">Doki Doki Coffee Date!</h1>
+        <p id="mainDesc">Sneak out of the classroom for a peaceful coffee shop rendezvous with Monika. But stay alert... variables are crumbling, files are dropping out of active memory slots, and someone is overriding the choice matrices.</p>
+        
+        <div class="character-zone">
+            <button class="char-btn">Sayori</button>
+            <button class="char-btn">Natsuki</button>
+            <button class="char-btn">Yuri</button>
+            <button class="char-btn" id="monikaBtn">Just Monika</button>
+        </div>
+
+        <!-- Multi-platform download section -->
+        <div class="download-zone">
+            <div class="download-title" id="dlTitle">Download Mod Package</div>
+            <div class="btn-group">
+                <!-- SWAP IN YOUR COPIED GITHUB DOWNLOAD LINK STRINGS HERE -->
+                <a href="PASTE_YOUR_WINDOWS_ZIP_RELEASE_LINK_HERE" class="download-btn" id="winBtn">Windows (.zip)</a>
+                <a href="PASTE_YOUR_MAC_DMG_RELEASE_LINK_HERE" class="download-btn" id="macBtn">macOS (.dmg)</a>
+                <a href="PASTE_YOUR_LINUX_RELEASE_LINK_HERE" class="download-btn" id="linBtn">Linux (.tar.bz2)</a>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        const monikaBtn = document.getElementById('monikaBtn');
+        const gameCard = document.getElementById('gameCard');
+        const mainTitle = document.getElementById('mainTitle');
+        const mainDesc = document.getElementById('mainDesc');
+        const dlTitle = document.getElementById('dlTitle');
+        
+        const winBtn = document.getElementById('winBtn');
+        const macBtn = document.getElementById('macBtn');
+        const linBtn = document.getElementById('linBtn');
+
+        // Trigger the high-intensity screen disruption sequence on hover
+        monikaBtn.addEventListener('mouseenter', () => {
+            gameCard.classList.add('corrupted-state');
+            mainTitle.classList.add('corrupted-text');
+            dlTitle.classList.add('corrupted-text');
+            
+            // Glitch the buttons
+            winBtn.classList.add('corrupted-btn');
+            macBtn.classList.add('corrupted-btn');
+            linBtn.classList.add('corrupted-btn');
+
+            mainTitle.innerText = "JŪSŦ MØNIKÅ";
+            dlTitle.innerText = "DØWNŁØAĐ MØNĬKĀ";
+            
+            winBtn.innerText = "mønĭkå.exe";
+            macBtn.innerText = "mønĭkå.dmg";
+            linBtn.innerText = "mønĭkå.run";
+
+            mainDesc.innerText = "Syste#m Err0r: bReak; d3l_all_characters.chr. Syste#m Err0r: bReak; d3l_all_characters.chr. JŪSŦ MØNIKÅ.";
+        });
+
+        // Restore the pristine visual novel theme when the mouse leaves
+        monikaBtn.addEventListener('mouseleave', () => {
+            gameCard.classList.remove('corrupted-state');
+            mainTitle.classList.remove('corrupted-text');
+            dlTitle.classList.remove('corrupted-text');
+            
+            winBtn.classList.remove('corrupted-btn');
+            macBtn.classList.remove('corrupted-btn');
+            linBtn.classList.remove('corrupted-btn');
+
+            mainTitle.innerText = "Doki Doki Coffee Date!";
+            dlTitle.innerText = "Download Mod Package";
+            
+            winBtn.innerText = "Windows (.zip)";
+            macBtn.innerText = "macOS (.dmg)";
+            linBtn.innerText = "Linux (.tar.bz2)";
+
+            mainDesc.innerText = "Sneak out of the classroom for a peaceful coffee shop rendezvous with Monika. But stay alert... variables are crumbling, files are dropping out of active memory slots, and someone is overriding the choice matrices.";
+        });
+    </script>
+
+</body>
+</html>
